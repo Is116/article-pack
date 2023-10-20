@@ -1,1 +1,1 @@
-# artical-pack
+# article-pack
