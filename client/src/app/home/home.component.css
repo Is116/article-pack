@@ -1,0 +1,26 @@
+
+@media screen and (max-width: 767px) {
+    .title{
+        font-size: 95px; 
+    }
+    .sub-title{
+        font-size: 45px; 
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .title{
+      font-size: 200px;
+    }
+    .sub-title{
+        font-size: 100px; 
+    }
+}
+@media screen and (min-width: 1024px) {
+    .title{
+      font-size: 260px;
+    }
+    .sub-title{
+        font-size: 130px;
+      }
+}
+  

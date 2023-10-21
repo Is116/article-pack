@@ -1,0 +1,14 @@
+<div id="categories" class="mx-4 lg:mx-8">
+    <div class="pt-10 pb-4 border-t-4 border-black flex justify-between items-center">
+      <p class="font-extrabold text-2xl md:text-4xl lg:text-6xl">Categories</p>
+      <a class="text-black py-2 px-4 text-base md:text-lg lg:text-xl font-normal">All Categories <fa-icon class="ml-2" [icon]="rightArrow"></fa-icon></a>
+    </div>
+    <div class="pt-10 pb-4">
+      <div class="lg:grid lg:grid-cols-4 md:grid md:grid-cols-2 sm:grid sm:grid-cols-1 gap-4">
+        <a *ngFor="let category of categories" [routerLink]="category.link" class="border-2 border-black hover:opacity-80 p-8 my-4 flex flex-col justify-center items-center">
+          <img [src]="category.imageSrc" alt="{{ category.name }} Image" class="w-full h-full mb-4 object-cover">
+          <p class="border-2 border-black py-1 px-4 rounded-full text-xl font-medium">{{ category.name }}</p>
+        </a>
+      </div>
+    </div>
+  </div>
