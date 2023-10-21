@@ -7,7 +7,12 @@ import { faInstagram, faTwitter, faYoutube, faBlogger } from '@fortawesome/free-
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  socialIcons = [faInstagram, faTwitter, faYoutube, faBlogger];
+  socialIcons = [
+    {route: '/', icon: faInstagram},
+    {route: '/', icon: faTwitter},
+    {route: '/', icon: faYoutube},
+    {route: '/', icon: faBlogger},
+  ];
   navLinks = [
     {route: '/', label: 'Home'},
     {route: '/about', label: 'About'},
