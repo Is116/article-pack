@@ -1,1 +1,25 @@
-<p>footer works!</p>
+<footer id="footer" class="bg-black text-[#ebebeb] flex flex-col gap-8 justify-center items-center pt-16 pb-12 overflow-hidden">
+    <div class="font-medium lg:text-9xl mb-16 overflow-clip whitespace-nowrap" style="font-size: x-large;">
+      Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++ &nbsp; Article Pack++
+    </div>
+    <div class="uppercase font-medium text-7xl lg:text-9xl overflow-clip whitespace-nowrap">
+      Article Pack Article Pack
+    </div>
+    <div class="px-8 lg:px-20 py-8 lg:py-10 flex flex-col xl:flex-row gap-8 items-center justify-between w-full">
+      <p class="text-xl lg:text-md ">
+        open for any offers and <br /> collaborations
+      </p>
+      <div class="flex flex-row gap-12">
+        <a *ngFor="let socialMedia of socialMediaLinks; let i = index"
+           [href]="socialMedia.route"
+           class="text-[#ebebeb] hover:text-[#yourhovercolor] transition-colors duration-300">
+          <fa-icon [icon]="socialMedia.icon" size="2x"></fa-icon>
+        </a>
+      </div>
+      <div class="bg-[#ebebeb] text-black py-2 px-20 lg:px-36 rounded-full font-normal text-xl lg:text-3xl"></div>
+    </div>
+    <div class="font-medium text-base">
+      Made With &#10084; By Isuru Pathirathna
+    </div>
+  </footer>
+  
