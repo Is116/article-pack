@@ -4,7 +4,6 @@ import { faInstagram, faTwitter, faYoutube, faBlogger } from '@fortawesome/free-
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
   socialMediaLinks = [
