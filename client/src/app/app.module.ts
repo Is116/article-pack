@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +11,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AboutComponent } from './components/about/about.component';
 import { FeaturesArticalsComponent } from './components/features-articals/features-articals.component';
+import { AllCategoriesComponent } from './pages/all-categories/all-categories.component';
+import { HeroComponent } from './components/hero/hero.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,15 @@ import { FeaturesArticalsComponent } from './components/features-articals/featur
     HomeComponent,
     CategoriesComponent,
     AboutComponent,
-    FeaturesArticalsComponent
+    FeaturesArticalsComponent,
+    AllCategoriesComponent,
+    HeroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
