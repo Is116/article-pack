@@ -13,6 +13,7 @@ import { AboutComponent } from './components/about/about.component';
 import { FeaturesArticalsComponent } from './components/features-articals/features-articals.component';
 import { AllCategoriesComponent } from './pages/all-categories/all-categories.component';
 import { HeroComponent } from './components/hero/hero.component';
+import { AllArticlesComponent } from './pages/all-articles/all-articles.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HeroComponent } from './components/hero/hero.component';
     AboutComponent,
     FeaturesArticalsComponent,
     AllCategoriesComponent,
-    HeroComponent
+    HeroComponent,
+    AllArticlesComponent
   ],
   imports: [
     BrowserModule,

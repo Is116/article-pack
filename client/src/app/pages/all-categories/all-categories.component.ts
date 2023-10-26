@@ -65,7 +65,7 @@ export class AllCategoriesComponent {
     if (term === '') {
       this.filteredCategories = this.categories;
     } else {
-      this.filteredCategories = this.categories.filter(item => item.name.toLowerCase().includes(term));
+      this.filteredCategories = this.categories.filter(item => item.name.toLowerCase().startsWith(term));
     }
   }
 }
