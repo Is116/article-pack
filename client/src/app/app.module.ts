@@ -6,11 +6,11 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { AboutComponent } from './about/about.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
