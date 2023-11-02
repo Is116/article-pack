@@ -5,14 +5,14 @@
     </div>
     <div class="pt-10 pb-4">
       <div class="grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-        <div *ngFor="let artical of articals" [routerLink]="artical.link" class="border-2 border-black p-8 my-4 flex flex-col justify-center items-center">
+        <a *ngFor="let artical of articals" [href]="artical.link" class="border-2 border-black p-8 my-4 flex flex-col justify-center items-center">
           <div class="flex flex-row w-full justify-end mb-4">
-            <div class="mt-6 py-1 px-4 text-xl font-medium">{{ artical.categorie }}</div>
+            <div class="mt-6 py-1 px-4 text-xl font-medium">{{ artical.category }}</div>
           </div>        
           <img [src]="artical.imageSrc" alt="{{ artical.name }}" class="w-full h-full mb-6 object-cover">
           <p class=" py-1 px-4 text-3xl font-semibold">{{ artical.name }}</p>
           <p class="hover:text-white hover:bg-black border-2 border-black mt-6 py-1 px-8 rounded-full text-xl font-medium">View</p>
-      </div>
+        </a>
     </div>
   </div>
 </div>

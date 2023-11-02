@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,11 +11,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { AboutComponent } from './components/about/about.component';
 import { FeaturesArticalsComponent } from './components/features-articals/features-articals.component';
 import { AllCategoriesComponent } from './pages/all-categories/all-categories.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { AllArticlesComponent } from './pages/all-articles/all-articles.component';
+import { ArticleSingleComponent } from './pages/article-single/article-single.component';
+import { ArticleDiscussionComponent } from './components/article-discussion/article-discussion.component';
+import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { LandingAboutComponent } from './components/landing-about/landing-about.component';
 
 @NgModule({
   declarations: [
@@ -22,17 +28,23 @@ import { AllArticlesComponent } from './pages/all-articles/all-articles.componen
     FooterComponent,
     HomeComponent,
     CategoriesComponent,
-    AboutComponent,
+    LandingAboutComponent,
     FeaturesArticalsComponent,
     AllCategoriesComponent,
     HeroComponent,
-    AllArticlesComponent
+    AllArticlesComponent,
+    ArticleSingleComponent,
+    ArticleDiscussionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

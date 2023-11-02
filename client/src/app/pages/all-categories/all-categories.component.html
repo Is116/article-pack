@@ -9,7 +9,7 @@
   </div>
   <div class="mx-4 lg:mx-12 mt-10 pb-4">
     <div class="grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-      <a *ngFor="let category of filteredCategories" [routerLink]="category.link"
+      <a *ngFor="let category of filteredCategories" [href]="category.link"
         class="border-2 border-black hover:opacity-80 p-8 my-4 flex flex-col justify-center items-center">
         <img [src]="category.imageSrc" alt="{{ category.name }}" class="w-full h-full mb-4 object-cover">
         <p class="py-1 px-4 text-md font-normal">{{ category.description }}</p>

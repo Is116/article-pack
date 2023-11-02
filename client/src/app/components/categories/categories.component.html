@@ -5,7 +5,7 @@
     </div>
     <div class="pt-10 pb-4">
       <div class="lg:grid xl:grid-cols-4 md:grid md:grid-cols-2 sm:grid sm:grid-cols-1 gap-4">
-        <a *ngFor="let category of categories" [routerLink]="category.link" class="border-2 border-black hover:opacity-80 p-8 my-4 flex flex-col justify-center items-center">
+        <a *ngFor="let category of categories" [href]="category.link" class="border-2 border-black hover:opacity-80 p-8 my-4 flex flex-col justify-center items-center">
           <img [src]="category.imageSrc" alt="{{ category.name }}" class="w-full h-full mb-4 object-cover">
           <p class=" py-1 px-4 text-md font-normal">{{ category.description }}</p>
           <p class="border-2 border-black mt-6 py-1 px-4 rounded-full text-xl font-medium">{{ category.name }}</p>

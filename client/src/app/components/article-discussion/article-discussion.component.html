@@ -1,0 +1,43 @@
+<div class="w-full max-w-6xl mx-auto px-4">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-lg lg:text-2xl font-bold text-gray-900">Discussion</h2>
+    </div>
+  
+    <form (submit)="addComment()">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Your comment</mat-label>
+        <textarea
+          id="comment"
+          name="comment"
+          matInput
+          rows="6"
+          placeholder="Write a comment..."
+          required
+          formControlName="comment"
+        ></textarea>
+        <mat-error *ngIf="commentForm.controls['comment'].invalid && commentForm.controls['comment'].touched">
+          Comment is required.
+        </mat-error>
+      </mat-form-field>
+      <button
+        type="submit"
+        class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-gray-900 rounded-lg mb-8"
+      >
+        Post comment
+      </button>
+    </form>
+  
+    <div *ngFor="let comment of comments" class="text-base bg-white rounded-lg py-3">
+      <div class="flex justify-between items-center mb-2">
+        <div class="flex items-center">
+          <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
+            {{ comment.username }}
+          </p>
+          <p class="text-sm text-gray-600">{{ comment.date }}</p>
+        </div>
+      </div>
+      <p class="text-gray-500">{{ comment.comment }}</p>
+    </div>
+</div>
+  
+  

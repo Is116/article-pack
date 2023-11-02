@@ -1,0 +1,15 @@
+<div class="my-16 flex flex-col items-center justify-center" *ngIf="article">
+    <div class="relative w-full h-96 overflow-hidden">
+      <img [src]="article.imageSrc" alt="Article Image" class="object-cover object-center w-full h-full">
+      <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+        <h1 class="text-white text-4xl sm:text-6xl font-bold text-center">{{ article.title }}</h1>
+        <p class="text-white text-lg font-semibold">{{ article.category }}</p>
+      </div>
+    </div>
+  
+    <div class="mx-4 lg:mx-12 w-full p-6 mt-8">
+      <p class="text-lg leading-relaxed">{{ article.content }}</p>
+    </div>
+    <app-article-discussion></app-article-discussion>
+</div> 
+  
