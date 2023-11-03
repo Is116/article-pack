@@ -1,0 +1,38 @@
+    <h2 class="text-4xl font-semibold text-center mb-8">Register</h2>
+      <form [formGroup]="signupForm" (ngSubmit)="signup()">
+        <div class="mb-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+          </mat-form-field>
+          <mat-error *ngIf="signupForm.controls['email'].invalid && signupForm.controls['email'].touched">
+            Email is required and must be a valid email.
+          </mat-error>
+        </div>
+        <div class="mb-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+          <mat-error *ngIf="signupForm.controls['password'].invalid && signupForm.controls['password'].touched">
+            Password is required and must be at least 8 characters.
+          </mat-error>
+        </div>
+        <div class="mb-6">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+          </mat-form-field>
+          <mat-error *ngIf="signupForm.hasError('passwordMismatch')">
+            Passwords do not match.
+          </mat-error>
+        </div>
+        <div class="flex items-center justify-between">
+          <button type="submit" class="bg-gray-900 hover:bg-white border-2 border-white text-white hover:text-gray-900 hover:border-2 hover:border-gray-900 font-bold py-2 px-4 rounded w-full" [disabled]="signupForm.invalid">
+            Register
+          </button>
+        </div>
+        <div class="mb-4 flex justify-center mt-3">
+          <a href="/login" class="text-gray-900 text-sm underline">Already have an account? Log In</a>
+        </div>
+      </form>

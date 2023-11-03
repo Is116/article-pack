@@ -1,0 +1,32 @@
+<div class="">
+    <p class="font-medium text-xl mb-4">Edit Category</p>
+    <form [formGroup]="categoryForm" (ngSubmit)="updateCategory()">
+      <input type="hidden" formControlName="id">
+  
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Category Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched">
+            Category name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="mb-4 flex flex-col md:flex-row">
+        <div class="">
+          <label for="categoryImage">Category Image:</label>
+          <input type="file" id="categoryImage" name="categoryImage" (change)="onImageSelected($event)">
+        </div>
+  
+        <div class="w-20 h-20">
+          <img [src]="selectedImage" alt="Selected Image" class="selected-image h-20 object-cover">
+        </div>
+      </div>
+  
+      <div class="mt-4">
+        <button type="submit" class="bg-gray-900 hover:bg-white border-2 border-white text-white hover:text-gray-900 hover:border-2 hover:border-gray-900 font-bold py-2 px-4 rounded w-full" [disabled]="categoryForm.invalid">Update Category</button>
+      </div>
+    </form>
+  </div>
+  
