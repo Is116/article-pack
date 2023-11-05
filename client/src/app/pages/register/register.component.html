@@ -2,6 +2,15 @@
       <form [formGroup]="signupForm" (ngSubmit)="signup()">
         <div class="mb-6">
           <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+          <mat-error *ngIf="signupForm.controls['name'].invalid && signupForm.controls['name'].touched">
+            Name is required.
+          </mat-error>
+        </div>
+        <div class="mb-6">
+          <mat-form-field appearance="fill" class="w-full">
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email">
           </mat-form-field>

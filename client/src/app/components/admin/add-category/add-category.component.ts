@@ -13,6 +13,7 @@ export class AddCategoryComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
     });
   }
 
@@ -22,6 +23,7 @@ export class AddCategoryComponent implements OnInit {
   createCategory() {
     if (this.categoryForm.valid) {
       const name = this.categoryForm.controls['name'].value;
+      const desscription = this.categoryForm.controls['description'].value;
     }
   }
 

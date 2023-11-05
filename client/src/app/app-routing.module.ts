@@ -11,8 +11,9 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { RegisterComponent } from './pages/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AdminDashboardComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
-import { CategoriesComponent } from './components/categories/categories.component';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
+import { AdminArticlesComponent } from './components/admin/admin-articles/admin-articles.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,8 @@ const routes: Routes = [
     path: 'admin',
     component: AdminDashboardComponent,
     children: [
+      { path: 'users', component: AdminUsersComponent },
+      { path: 'articles', component: AdminArticlesComponent },
       { path: 'categories', component: AdminCategoriesComponent },
       { path: 'settings', component: SettingsComponent },
     ],

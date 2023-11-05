@@ -1,4 +1,4 @@
-<div class="">
+<div class="p-4">
     <p class="font-medium text-xl mb-4">Add Category</p>
     <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
       <div class="mb-4">
@@ -7,6 +7,15 @@
           <input matInput type="text" formControlName="name">
           <mat-error *ngIf="categoryForm.controls['name'].invalid && categoryForm.controls['name'].touched">
             Category name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Category Description</mat-label>
+          <textarea matInput formControlName="description" rows="5"></textarea>
+          <mat-error *ngIf="categoryForm.controls['description'].invalid && categoryForm.controls['description'].touched">
+            Description is required.
           </mat-error>
         </mat-form-field>
       </div>

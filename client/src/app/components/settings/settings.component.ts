@@ -10,7 +10,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.editUserForm = this.fb.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
@@ -24,11 +24,11 @@ export class SettingsComponent implements OnInit {
 
   saveChanges() {
     if (this.editUserForm.valid) {
-      const username = this.editUserForm.controls['username'].value;
+      const name = this.editUserForm.controls['name'].value;
       const email = this.editUserForm.controls['email'].value;
       const password = this.editUserForm.controls['password'].value;
 
-      console.log('Updated User Data:', { username, email, password });
+      console.log('Updated User Data:', { name, email, password });
     }
   }
 

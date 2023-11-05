@@ -1,5 +1,5 @@
 
-<app-add-category></app-add-category>
+<button type="button" class="bg-gray-900 hover:bg-white border-2 border-white text-white hover:text-gray-900 hover:border-2 hover:border-gray-900 font-bold py-2 px-4 rounded w-full" (click)="openAddCategoryModal()">Add Category</button>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
     <table class="w-full text-sm text-left text-gray-500 min-w-[600px]">
       <thead class="text-xs text-gray-700 uppercase">
@@ -26,8 +26,8 @@
             <img [src]="category.imageUrl" alt="{{ category.name }} Image" class="h-20 object-cover">
           </td>
           <td class="flex flex-col px-6 py-4">
-            <a href="#" class="font-medium text-gray-900" (click)="openEditCategoryModal(category.id)">Edit</a>
-            <a href="#" class="font-medium text-red-600">Delete</a>
+            <button class="font-medium text-gray-900" (click)="openEditCategoryModal(category)">Edit</button>
+            <button  class="font-medium text-red-600" (click)="openDeleteConfirmationModal(category.id)">Delete</button>
           </td>
         </tr>
       </tbody>

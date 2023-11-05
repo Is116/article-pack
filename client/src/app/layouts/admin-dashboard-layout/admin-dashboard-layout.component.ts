@@ -10,6 +10,8 @@ export class AdminDashboardComponent {
     navigationLinks: [
       { label: 'Dashboard', link: '/admin/dashboard' },
       { label: 'Categories', link: '/admin/categories' },
+      { label: 'Articles', link: '/admin/articles' },
+      { label: 'Users', link: '/admin/users' },
       { label: 'Settings', link: '/admin/settings' },
     ],
     userProfile: {

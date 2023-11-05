@@ -1,26 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
 })
-export class EditCategoryComponent implements OnInit {
+export class EditCategoryComponent {
   categoryForm: FormGroup;
+  category: any;
   selectedImage: string | ArrayBuffer | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    public dialogRef: MatDialogRef<EditCategoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { category: any },
+    private fb: FormBuilder
+  ) {
+    this.category = data.category;
     this.categoryForm = this.fb.group({
-      name: ['', [Validators.required]],
+      name: [this.category.name, [Validators.required]],
+      description: [this.category.description, [Validators.required]],
     });
-  }
-
-  ngOnInit(): void {
   }
 
   updateCategory() {
     if (this.categoryForm.valid) {
       const name = this.categoryForm.controls['name'].value;
+      const description = this.categoryForm.controls['description'].value;
+      // Add your logic to update the category with new data
+
+      // Close the dialog and pass the updated category data
+      this.dialogRef.close(this.category);
     }
   }
 
@@ -39,5 +49,8 @@ export class EditCategoryComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-}
 
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+}

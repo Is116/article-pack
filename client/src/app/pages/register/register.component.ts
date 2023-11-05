@@ -10,6 +10,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.signupForm = this.fb.group({
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)],],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)],]
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
 
   signup() {
     if (this.signupForm.valid) {
+      const name = this.signupForm.controls['name'].value;
       const email = this.signupForm.controls['email'].value;
       const password = this.signupForm.controls['password'].value;
     }

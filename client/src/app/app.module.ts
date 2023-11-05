@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +32,14 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
 import { EditCategoryComponent } from './components/admin/edit-category/edit-category.component';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
+import { AdminArticlesComponent } from './components/admin/admin-articles/admin-articles.component';
+import { AddArticalComponent } from './components/admin/add-artical/add-artical.component';
+import { EditArticalComponent } from './components/admin/edit-artical/edit-artical.component';
+import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { AddUserComponent } from './components/admin/add-user/add-user.component';
+import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
+import { ViewArticalContentComponent } from './components/admin/view-artical-content/view-artical-content.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +63,15 @@ import { EditCategoryComponent } from './components/admin/edit-category/edit-cat
     SettingsComponent,
     AddCategoryComponent,
     AdminCategoriesComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    ConfirmDeleteComponent,
+    AdminArticlesComponent,
+    AddArticalComponent,
+    EditArticalComponent,
+    AdminUsersComponent,
+    AddUserComponent,
+    EditUserComponent,
+    ViewArticalContentComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +82,7 @@ import { EditCategoryComponent } from './components/admin/edit-category/edit-cat
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule,
     BrowserAnimationsModule,
   ],
   providers: [],

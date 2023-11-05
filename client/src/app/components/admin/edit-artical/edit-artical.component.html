@@ -1,0 +1,57 @@
+<div class="p-6">
+    <p class="font-medium text-xl mb-4">Edit Article</p>
+    <form [formGroup]="articleForm" (ngSubmit)="updateArticle()">
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="articleForm.controls['name'].invalid && articleForm.controls['name'].touched">
+            Article name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="articleForm.controls['category'].invalid && articleForm.controls['category'].touched">
+            Category is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Content</mat-label>
+          <textarea matInput rows="5" formControlName="content"></textarea>
+          <mat-error *ngIf="articleForm.controls['content'].invalid && articleForm.controls['content'].touched">
+            Content is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-4">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Approval Status</mat-label>
+          <mat-select formControlName="approvalStatus">
+            <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="mb-4 flex flex-col md:flex-row">
+        <div class="">
+          <label for="articleImage">Article Image:</label>
+          <input type="file" id="articleImage" name="articleImage" (change)="onImageSelected($event)">
+        </div>
+        <div class="w-20 h-20">
+          <img [src]="selectedImage" alt="Selected Image" class="selected-image h-20 object-cover">
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="bg-gray-900 hover:bg-white border-2 border-white text-white hover:text-gray-900 hover-border-2 hover-border-gray-900 font-bold py-2 px-4 rounded w-full" [disabled]="articleForm.invalid">Update Article</button>
+      </div>
+    </form>
+  </div>
+  

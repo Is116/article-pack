@@ -1,0 +1,10 @@
+<div class="p-4">
+    <p mat-dialog-title class="font-medium text-xl">Confirm Delete</p>
+    <div mat-dialog-content>
+        <p>{{ data.message }}</p>
+    </div>
+    <div class="flex flex-row gap-4 justify-center">
+        <button (click)="onCancelClick()" class="bg-gray-900 text-white px-4 py-2 rounded-md">Cancel</button>
+        <button color="warn" (click)="onConfirmClick()" class="bg-red-600 text-white px-4 py-2 rounded-md">Delete</button>
+    </div>
+</div>

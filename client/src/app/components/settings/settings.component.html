@@ -3,10 +3,10 @@
     <form [formGroup]="editUserForm" (ngSubmit)="saveChanges()">
       <div class="mb-4">
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Username</mat-label>
-          <input matInput type="text" formControlName="username">
-          <mat-error *ngIf="editUserForm.controls['username'].invalid && editUserForm.controls['username'].touched" class="text-mat-error text-mat-error-message">
-            Username is required.
+          <mat-label>name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-error *ngIf="editUserForm.controls['name'].invalid && editUserForm.controls['name'].touched" class="text-mat-error text-mat-error-message">
+            Name is required.
           </mat-error>
         </mat-form-field>
       </div>

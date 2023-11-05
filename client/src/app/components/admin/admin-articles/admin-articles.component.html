@@ -1,0 +1,40 @@
+<button type="button" class="bg-gray-900 hover-bg-white border-2 border-white text-white hover-text-gray-900 hover-border-2 hover-border-gray-900 font-bold py-2 px-4 rounded w-full" (click)="openAddArticalModal()">Add Article</button>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+  <table class="w-full text-sm text-left text-gray-500 min-w-[1000px]">
+    <thead class="text-xs text-gray-700 uppercase">
+      <tr>
+        <th scope="col" class="px-6 py-3">#</th>
+        <th scope="col" class="px-6 py-3">Name</th>
+        <th scope="col" class="px-6 py-3">Category</th>
+        <th scope="col" class="px-6 py-3">Image</th>
+        <th scope="col" class="px-6 py-3">Status</th>
+        <th scope="col" class="px-6 py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-white border-b" *ngFor="let article of articles; let i = index">
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+          {{ i + 1 }}
+        </th>
+        <td class="px-6 py-4">
+          {{ article.name }}
+        </td>
+        <td class="px-6 py-4">
+          {{ article.category }}
+        </td>
+        <td class="px-6 py-4">
+          <img [src]="article.imageUrl" alt="{{ article.name }} Image" class="h-20 object-cover">
+        </td>
+        <td class="px-6 py-4">
+          {{ article.status }}
+        </td>
+        <td class="flex flex-col justify-start px-6 py-4">
+          <!-- <button class="font-medium text-blue-600" (click)="viewComments(article.id)">View Comments</button> -->
+          <button class="font-medium text-green-600" (click)="viewContent(article.content)">View Content</button>
+          <button class="font-medium text-gray-900" (click)="openEditArticalModal(article)">Edit</button>
+          <button class="font-medium text-red-600" (click)="openDeleteConfirmationModal(article.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
