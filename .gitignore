@@ -1,1 +1,64 @@
-.//node_modules
+# Ignore Node.js backend related files and directories
+/backend/node_modules/
+/backend/npm-debug.log
+/backend/package-lock.json
+/backend/yarn-error.log
+/backend/.pnpm/
+/backend/.pnpm-debug.log
+
+# Ignore Angular frontend related files and directories
+/frontend/dist/
+/frontend/e2e/
+/frontend/node_modules/
+/frontend/src/app/env.js
+/frontend/src/environments/
+/frontend/.angular-config.json
+/frontend/.angular-cli.json
+/frontend/.angular.json
+/frontend/.npmrc
+/frontend/.npmrc.yaml
+/frontend/npm-debug.log
+/frontend/tsconfig.json
+/frontend/tsconfig.base.json
+
+# Ignore your environment-specific files
+.env
+.env.local
+.env.development
+.env.staging
+.env.production
+
+# Ignore log files and build artifacts
+logs/
+*.log
+*.log.*
+*.pid
+*.seed
+*.pid.lock
+yarn-error.log
+npm-debug.log
+pids
+*.db
+*.sqlite
+*.db-shm
+*.db-wal
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore editor-specific files
+.idea/
+.vscode/
+
+# Ignore test files
+coverage/
+__tests__/
+*.spec.js
+*.spec.ts
+
+# Ignore package manager files
+yarn.lock
+pnpm-lock.yaml
+.npmrc
+.pnp.js
