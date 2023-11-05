@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faInstagram, faTwitter, faYoutube, faBlogger } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   socialIcons = [
     {route: '/', icon: faInstagram},
     {route: '/', icon: faTwitter},
@@ -18,4 +18,10 @@ export class HeaderComponent {
     {route: '/categories', label: 'Categories'},
     {route: '/articles', label: 'Articles'}
   ];
+
+  dropdownOpen = false;
+
+  constructor() { }
+
+  ngOnInit() { }
 }

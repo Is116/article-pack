@@ -27,7 +27,7 @@ import { LandingAboutComponent } from './components/landing-about/landing-about.
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { AdminDashboardComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
+import { AdminDashboardLayoutComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
@@ -40,6 +40,11 @@ import { AdminUsersComponent } from './components/admin/admin-users/admin-users.
 import { AddUserComponent } from './components/admin/add-user/add-user.component';
 import { EditUserComponent } from './components/admin/edit-user/edit-user.component';
 import { ViewArticalContentComponent } from './components/admin/view-artical-content/view-artical-content.component';
+import { AdminCommentsComponent } from './components/admin/admin-comments/admin-comments.component';
+import { UserArticlesComponent } from './components/user/user-articles/user-articles.component';
+import { UserDashboardLayoutComponent } from './layouts/user-dashboard-layout/user-dashboard-layout.component';
+import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,7 @@ import { ViewArticalContentComponent } from './components/admin/view-artical-con
     MainLayoutComponent,
     AuthLayoutComponent,
     RegisterComponent,
-    AdminDashboardComponent,
+    AdminDashboardLayoutComponent,
     SettingsComponent,
     AddCategoryComponent,
     AdminCategoriesComponent,
@@ -71,7 +76,12 @@ import { ViewArticalContentComponent } from './components/admin/view-artical-con
     AdminUsersComponent,
     AddUserComponent,
     EditUserComponent,
-    ViewArticalContentComponent
+    ViewArticalContentComponent,
+    AdminCommentsComponent,
+    UserArticlesComponent,
+    UserDashboardLayoutComponent,
+    UserDashboardComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

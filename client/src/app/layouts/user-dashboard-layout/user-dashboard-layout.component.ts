@@ -1,18 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-admin-dashboard-layout',
-  templateUrl: './admin-dashboard-layout.component.html',
+  selector: 'app-user-dashboard-layout',
+  templateUrl: './user-dashboard-layout.component.html',
 })
-
-export class AdminDashboardLayoutComponent {
+export class UserDashboardLayoutComponent {
   sidebarData: SidebarData = {
     navigationLinks: [
-      { label: 'Dashboard', link: '/admin/dashboard' },
-      { label: 'Categories', link: '/admin/categories' },
-      { label: 'Articles', link: '/admin/articles' },
-      { label: 'Users', link: '/admin/users' },
-      { label: 'Settings', link: '/admin/settings' },
+      { label: 'Dashboard', link: '/user' },
+      { label: 'Articles', link: '/user/articles' },
+      { label: 'Settings', link: '/user/settings' },
     ],
     userProfile: {
       avatar: 'user-avatar.jpg',

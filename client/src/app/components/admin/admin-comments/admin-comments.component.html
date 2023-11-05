@@ -1,0 +1,17 @@
+<div class="p-6">
+    <h2 class="text-xl font-medium mb-4">Comments</h2>
+    <ul class="bg-white border rounded-lg overflow-hidden shadow-md w-full sm:w-96">
+      <li *ngFor="let comment of comments" class="border-b last:border-b-0">
+        <div class="flex items-center p-4">
+          <div class="w-10/12">
+            <p class="font-medium text-gray-800">{{ comment.author }}</p>
+            <p class="text-gray-600">{{ comment.text }}</p>
+          </div>
+          <div class="w-2/12 text-right">
+            <button class="font-medium text-red-600" (click)="deleteComment(comment.id)">Delete</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

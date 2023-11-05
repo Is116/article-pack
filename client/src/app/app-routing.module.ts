@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AllCategoriesComponent } from './pages/all-categories/all-categories.component';
@@ -10,10 +11,14 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
-import { AdminDashboardComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
+import { AdminDashboardLayoutComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
 import { AdminArticlesComponent } from './components/admin/admin-articles/admin-articles.component';
 import { AdminUsersComponent } from './components/admin/admin-users/admin-users.component';
+import { UserDashboardLayoutComponent } from './layouts/user-dashboard-layout/user-dashboard-layout.component';
+import { UserArticlesComponent } from './components/user/user-articles/user-articles.component';
+import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -37,11 +42,21 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminDashboardComponent,
+    component: AdminDashboardLayoutComponent,
     children: [
+      { path: '', component: AdminDashboardComponent },
       { path: 'users', component: AdminUsersComponent },
       { path: 'articles', component: AdminArticlesComponent },
       { path: 'categories', component: AdminCategoriesComponent },
+      { path: 'settings', component: SettingsComponent },
+    ],
+  },
+  {
+    path: 'user',
+    component: UserDashboardLayoutComponent,
+    children: [
+      { path: '', component: UserDashboardComponent },
+      { path: 'articles', component: UserArticlesComponent },
       { path: 'settings', component: SettingsComponent },
     ],
   },

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { EditArticalComponent } from '../../admin/edit-artical/edit-artical.component';
 import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
-import { AddArticalComponent } from '../add-artical/add-artical.component';
-import { EditArticalComponent } from '../edit-artical/edit-artical.component';
-import { ViewArticalContentComponent } from '../view-artical-content/view-artical-content.component';
-import { AdminCommentsComponent } from '../admin-comments/admin-comments.component';
+import { AddArticalComponent } from '../../admin/add-artical/add-artical.component';
+import { ViewArticalContentComponent } from '../../admin/view-artical-content/view-artical-content.component';
+import { AdminCommentsComponent } from '../../admin/admin-comments/admin-comments.component';
 
 @Component({
-  selector: 'app-admin-articles',
-  templateUrl: './admin-articles.component.html',
+  selector: 'app-user-articles',
+  templateUrl: './user-articles.component.html',
 })
-export class AdminArticlesComponent implements OnInit {
+export class UserArticlesComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
