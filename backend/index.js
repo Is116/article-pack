@@ -6,6 +6,7 @@ const createSocketIO = require("./routs/socket");
 const connectToDatabase = require("./db");
 const authRoute = require('./routs/auth');
 const articlesRoute = require('./routs/articles');
+const commentsRoute = require('./routs/comments');
 
 const app = express();
 const server = http.createServer(app);
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/auth', authRoute);
 app.use('/api/articles', articlesRoute);
+app.use('/api/comments', commentsRoute);
 
 const port = process.env.PORT;
 server.listen(port, () => {

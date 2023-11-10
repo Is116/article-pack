@@ -1,5 +1,8 @@
+// add-user.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-user',
@@ -10,7 +13,7 @@ export class AddUserComponent implements OnInit {
 
   roles: string[] = ['Admin', 'User'];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) {
     this.userForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -24,21 +27,21 @@ export class AddUserComponent implements OnInit {
 
   addUser() {
     if (this.userForm.valid) {
-      const name = this.userForm.controls['name'].value;
-      const email = this.userForm.controls['email'].value;
-      const role = this.userForm.controls['role'].value;
-      const password = this.userForm.controls['password'].value;
-      const confirmPassword = this.userForm.controls['confirmPassword'].value;
+      const { name, email, role, password, confirmPassword } = this.userForm.value;
 
       if (password !== confirmPassword) {
         console.log('Password and confirm password do not match');
       } else {
-        console.log('Name:', name);
-        console.log('Email:', email);
-        console.log('Role:', role);
-        console.log('Password:', password);
-
-        this.userForm.reset();
+        this.http.post('http://localhost:25000/api/auth/register', { name, email, role, password }).subscribe(
+          (response: any) => {
+            alert('User registered successfully:'+response.data);
+            this.userForm.reset();
+            window.location.reload();
+          },
+          (error) => {
+            console.error('Error registering user:', error);
+          }
+        );
       }
     }
   }

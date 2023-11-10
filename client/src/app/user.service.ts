@@ -31,6 +31,7 @@ export class UserService {
           return;
         }
         return response.json();
+        
       })
       .then((data) => {
         this.setUserData(data);

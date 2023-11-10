@@ -28,7 +28,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AdminDashboardLayoutComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { SettingsComponent } from './components/settings/settingsComponent';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
 import { EditCategoryComponent } from './components/admin/edit-category/edit-category.component';
@@ -46,6 +46,7 @@ import { UserDashboardLayoutComponent } from './layouts/user-dashboard-layout/us
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { UserService } from './user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { UserService } from './user.service';
     MatDialogModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     UserService,

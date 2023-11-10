@@ -100,9 +100,9 @@ export class AdminArticlesComponent implements OnInit {
     });
   }
 
-  viewComments(articalId: string): void {
+  viewComments(articleId: string): void {
     const dialogRef = this.dialog.open(AdminCommentsComponent, {
-      data: { articalId },
+      data: { articleId },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

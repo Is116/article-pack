@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,7 +15,8 @@ export class EditUserComponent {
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { user: any },
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.user = data.user;
     this.userForm = this.fb.group({
@@ -32,11 +34,24 @@ export class EditUserComponent {
       const email = this.userForm.controls['email'].value;
       const role = this.userForm.controls['role'].value;
 
-      this.user.name = name;
-      this.user.email = email;
-      this.user.role = role;
+      const apiUrl = `http://localhost:25000/api/auth/updateUser/${this.user._id}`;
 
-      this.dialogRef.close(this.user);
+      const updatedUser = {
+        name,
+        email,
+        role,
+      };
+
+      this.http.put(apiUrl, updatedUser).subscribe(
+        (response) => {
+          console.log('User updated successfully:', response);
+          this.dialogRef.close(updatedUser);
+          window.location.reload();
+        },
+        (error) => {
+          console.error('Error updating user:', error);
+        }
+      );
     }
   }
 

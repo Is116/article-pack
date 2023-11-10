@@ -47,6 +47,7 @@ export class AddCategoryComponent implements OnInit {
           if (data.message) {
             alert(data.message);
           }
+          window.location.reload();
         });
     }
   }

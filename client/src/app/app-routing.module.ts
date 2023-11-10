@@ -10,7 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { SettingsComponent } from './components/settings/settings.component';
+import { SettingsComponent } from './components/settings/settingsComponent';
 import { AdminDashboardLayoutComponent } from './layouts/admin-dashboard-layout/admin-dashboard-layout.component';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
 import { AdminArticlesComponent } from './components/admin/admin-articles/admin-articles.component';

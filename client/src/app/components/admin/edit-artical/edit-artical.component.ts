@@ -103,6 +103,7 @@ export class EditArticalComponent {
           if (data.message) {
             alert(data.message);
           }
+          window.location.reload();
         })
         .catch((error) => {
           console.error('Error updating article:', error);

@@ -1,58 +1,86 @@
+// article-discussion.component.ts
 
-import { Component } from'@angular/core';
-import { FormBuilder, FormGroup, Validators } from'@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/user.service';
 
 interface Comment {
-  username: string;
-  date: string;
+  date: string | null;
   comment: string;
+  username: string; // Change 'userId' to 'username'
+  articleId: string;
 }
 
 @Component({
   selector: 'app-article-discussion',
   templateUrl: './article-discussion.component.html',
+  providers: [DatePipe],
 })
-export class ArticleDiscussionComponent {
-  commentForm: FormGroup;
-  comments: Comment[] = [
-    {
-      username: "Michael Gough",
-      date: "2022-02-08",
-      comment: "Very straight-to-point article. Really worth time reading. Thank you! But tools are just the instruments for the UX designers. The knowledge of the design tools are as important as the creation of the design strategy."
-    },
-    {
-      username: "Jese Leos",
-      date: "2022-02-12",
-      comment: "Much appreciated! Glad you liked it ☺️"
-    },
-    {
-      username: "Bonnie Green",
-      date: "2022-03-12",
-      comment: "The article covers the essentials, challenges, myths and stages the UX designer should consider while creating the design strategy."
-    },
-    {
-      username: "Helene Engels",
-      date: "2022-06-23",
-      comment: "Thanks for sharing this. I do come from Backend development and explored some of the tools to design my Side Projects."
-    },
-  ];
+export class ArticleDiscussionComponent implements OnInit {
+  @Input() articleId: string = '';
+  commentForm: FormGroup; 
+  comments: Comment[] = [];
+  currentUser: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private datePipe: DatePipe,
+    private http: HttpClient,
+    private userService: UserService
+  ) {
     this.commentForm = this.fb.group({
       comment: ['', Validators.required],
     });
   }
 
+  ngOnInit() {
+    this.fetchComments();
+    this.currentUser = this.userService.getUserData();
+  }
+
+  fetchComments() {
+    const apiUrl = `http://localhost:25000/api/comments/getComments?articleId=${this.articleId}`;
+
+    this.http.get(apiUrl).subscribe(
+      (data: any) => {
+        this.comments = data.comments.map((comment: any) => ({
+          date: comment.date,
+          comment: comment.comment,
+          username: comment.username,
+          articleId: comment.articleId,
+        }));
+      },
+      (error) => {
+        console.error('Error fetching comments:', error);
+      }
+    );
+  }
+
   addComment() {
     if (this.commentForm.valid) {
-      const newComment: Comment = {
-        username: 'Your Username',
-        date: new Date().toISOString(),
-        comment: this.commentForm.value.comment,
-      };
+      if (this.currentUser) {
+        const newComment: Comment = {
+          date: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+          comment: this.commentForm.value.comment,
+          username: this.currentUser.name,
+          articleId: this.articleId,
+        };
 
-      this.comments.push(newComment);
-      this.commentForm.reset(); 
+        console.log(this.currentUser);
+        this.http.post('http://localhost:25000/api/comments/addComment', newComment).subscribe(
+          (data: any) => {
+            this.comments.push(data.comment);
+            this.commentForm.reset();
+          },
+          (error) => {
+            console.error('Error adding comment:', error);
+          }
+        );
+      } else {
+        alert('User is not authenticated');
+      }
     }
   }
 }

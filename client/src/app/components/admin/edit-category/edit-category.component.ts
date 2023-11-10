@@ -56,6 +56,7 @@ export class EditCategoryComponent {
           if (data.message) {
             alert(data.message);
           }
+          window.location.reload();
         });
 
       // Close the dialog and pass the updated category data
