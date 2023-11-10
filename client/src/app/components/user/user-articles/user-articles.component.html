@@ -4,6 +4,7 @@
     <thead class="text-xs text-gray-700 uppercase">
       <tr>
         <th scope="col" class="px-6 py-3">#</th>
+        <th scope="col" class="px-6 py-3">Author</th>
         <th scope="col" class="px-6 py-3">Name</th>
         <th scope="col" class="px-6 py-3">Category</th>
         <th scope="col" class="px-6 py-3">Image</th>
@@ -17,13 +18,16 @@
           {{ i + 1 }}
         </th>
         <td class="px-6 py-4">
+          {{ article.author }}
+        </td>
+        <td class="px-6 py-4">
           {{ article.name }}
         </td>
         <td class="px-6 py-4">
-          {{ article.category }}
+          {{ article.categoryName }}
         </td>
         <td class="px-6 py-4">
-          <img [src]="article.imageUrl" alt="{{ article.name }} Image" class="h-20 object-cover">
+          <img [src]="article.image" alt="{{ article.name }} Image" class="h-20 object-cover">
         </td>
         <td class="px-6 py-4">
           {{ article.status }}

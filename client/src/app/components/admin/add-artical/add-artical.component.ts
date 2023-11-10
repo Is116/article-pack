@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-add-artical',
@@ -9,18 +10,22 @@ export class AddArticalComponent implements OnInit {
   articleForm: FormGroup;
   selectedImage: string | ArrayBuffer | null = null;
   uploadedImage: string | null = null;
+  user: any;
 
   categories = [] as any[];
 
   approvalStatuses = ['pending', 'approved', 'rejected'];
+  
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private userService: UserService) {
     this.articleForm = this.fb.group({
       name: ['', [Validators.required]],
       category: ['', [Validators.required]],
       content: ['', [Validators.required]],
       approvalStatus: ['pending'],
     });
+
+    
 
     //get categories from server
     fetch('http://localhost:25000/api/articles/getCategories')
@@ -52,6 +57,7 @@ export class AddArticalComponent implements OnInit {
       const approvalStatus = this.articleForm.controls['approvalStatus'].value;
       const image = this.uploadedImage;
 
+      this.user = this.userService.getUserData();
       // send data to server with API localhost:25000/api/articles/addArticle
       fetch('http://localhost:25000/api/articles/addArticle', {
         method: 'POST',
@@ -64,7 +70,7 @@ export class AddArticalComponent implements OnInit {
           content,
           status: approvalStatus,
           image,
-          author: 'admin',
+          author: this.user.id,
         }),
       })
         .then((response) => {

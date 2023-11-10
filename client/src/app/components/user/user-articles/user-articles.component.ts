@@ -11,10 +11,47 @@ import { AdminCommentsComponent } from '../../admin/admin-comments/admin-comment
   templateUrl: './user-articles.component.html',
 })
 export class UserArticlesComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
-
-  ngOnInit(): void {
+  articles = [] as any[];
+  constructor(public dialog: MatDialog) {
+    //get articles from server
+    fetch('http://localhost:25000/api/articles/getArticles')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.articles) {
+          const articlesWithCategoryNames = data.articles.map(
+            async (article: any) => {
+              const categoryResponse = await fetch(
+                `http://localhost:25000/api/articles/getCategory/${article.category}`
+              );
+              const categoryData = await categoryResponse.json();
+              if (categoryData && categoryData.category) {
+                article.id = article._id;
+                article.categoryName = categoryData.category.name;
+                article.categoryId = categoryData.category._id;
+              } else {
+                console.error(
+                  'Category data is not in the expected format:',
+                  categoryData
+                );
+              }
+              return article;
+            }
+          );
+          Promise.all(articlesWithCategoryNames).then((articles) => {
+            this.articles = articles;
+          });
+        } else {
+          console.error('Data is not in the expected format:', data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching articles:', error);
+      });
   }
+
+  ngOnInit(): void {}
 
   openEditArticalModal(article: any): void {
     const dialogRef = this.dialog.open(EditArticalComponent, {
@@ -29,11 +66,30 @@ export class UserArticlesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // this.deleteCategory(categoryId);
+        // delete artical from server
+        fetch(
+          `http://localhost:25000/api/articles/deleteArticle/${articalId}`,
+          {
+            method: 'DELETE',
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            if (data.message) {
+              alert(data.message);
+            } else {
+              alert('Error deleting artical');
+            }
+          })
+          .catch((error) => {
+            alert('Error deleting artical');
+          });
       }
     });
   }
-  
+
   openAddArticalModal(): void {
     const dialogRef = this.dialog.open(AddArticalComponent);
   }
@@ -44,9 +100,9 @@ export class UserArticlesComponent implements OnInit {
     });
   }
 
-  viewComments(articalId: string ): void {
+  viewComments(articleId: string): void {
     const dialogRef = this.dialog.open(AdminCommentsComponent, {
-      data: { articalId },
+      data: { articleId },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -54,47 +110,4 @@ export class UserArticlesComponent implements OnInit {
       }
     });
   }
-
-  articles = [
-    {
-      id:"1",
-      author:"Isuru Pathirathna",
-      name: 'Explore a world',
-      category: 'Books',
-      content: 'Explore a world of knowledge and imagination through our vast collection of books.',
-      imageUrl: 'https://img.freepik.com/free-vector/hand-drawn-literature-illustration_23-2149290554.jpg?w=740&t=st=1697902873~exp=1697903473~hmac=0a7e9f21fee479c18d8531a891b1d11f025b71c4c15d0950733f3da4ff56dfd2',
-      status: 'approved',
-      link: '/article/1',
-    },
-    {
-      id:"2",
-      author:"Isuru Pathirathna",
-      name: 'Dive into the',
-      category: 'Arts',
-      content: 'Dive into the world of creativity and self-expression with our diverse collection of arts.',
-      imageUrl: 'https://img.freepik.com/free-photo/abstract-colorful-splash-3d-background-generative-ai-background_60438-2494.jpg?w=1380&t=st=1697902967~exp=1697903567~hmac=1bb20b863ef8693a784247eb3886a245da814cf394b312a5ecf63ff404ea6638',
-      status: 'approved',
-      link: '/article/2',
-    },
-    {
-      id:"3",
-      author:"Isuru Pathirathna",
-      name: 'Enhance',
-      category: 'UX',
-      content: 'Enhance user experiences and design with cutting-edge user interface and user experience resources.',
-      imageUrl: 'https://img.freepik.com/free-vector/gradient-ui-ux-elements-background_23-2149056159.jpg?t=st=1697903176~exp=1697903776~hmac=c957b08d3daeadb724d29fa245f0c92dbd1f5abd0d781268701c1f6d7d119994',
-      status: 'approved',
-      link: '/article/3',
-    },
-    {
-      id:"4",
-      author:"Isuru Pathirathna",
-      name:'Delve into',
-      category: 'Philosophy',
-      content: 'Delve into the depths of philosophical thought and contemplation with our philosophical resources.',
-      imageUrl: 'https://img.freepik.com/free-vector/hand-drawn-mindfulness-concept-with-characters_52683-69073.jpg?w=740&t=st=1697903055~exp=1697903655~hmac=67f080c9c8752ff32fa363864b231c572de07466125b74f6bae9b52320e3ab56',
-      status: 'approved',
-      link: '/article/4',
-    },
-  ];
 }

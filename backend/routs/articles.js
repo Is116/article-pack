@@ -123,6 +123,24 @@ router.get("/getArticles", async (req, res) => {
   }
 });
 
+router.get("/getUserArticles", async (req, res) => {
+  try {
+    const { userId } = req.query;
+
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required' });
+    }
+
+    const articles = await Article.find({ author: userId });
+
+    res.status(200).json({ articles });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 // delete article
 router.delete("/deleteArticle/:id", async (req, res) => {
   try {

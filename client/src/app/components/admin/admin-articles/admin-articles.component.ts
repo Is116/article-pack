@@ -13,7 +13,6 @@ import { AdminCommentsComponent } from '../admin-comments/admin-comments.compone
 export class AdminArticlesComponent implements OnInit {
   articles = [] as any[];
   constructor(public dialog: MatDialog) {
-    //get articles from server
     fetch('http://localhost:25000/api/articles/getArticles')
       .then((response) => {
         return response.json();
@@ -26,14 +25,24 @@ export class AdminArticlesComponent implements OnInit {
                 `http://localhost:25000/api/articles/getCategory/${article.category}`
               );
               const categoryData = await categoryResponse.json();
+
+              const userResponse = await fetch(
+                `http://localhost:25000/api/auth/getUserById/${article.author}`
+              );
+              const userData = await userResponse.json();
+
               if (categoryData && categoryData.category) {
                 article.id = article._id;
                 article.categoryName = categoryData.category.name;
                 article.categoryId = categoryData.category._id;
+                article.userName = userData.name;
+                article.userId = userData._id;
+                
               } else {
                 console.error(
                   'Category data is not in the expected format:',
-                  categoryData
+                  categoryData,
+                  userData
                 );
               }
               return article;
