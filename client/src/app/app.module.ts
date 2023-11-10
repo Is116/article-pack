@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-
+// import { CloudinaryModule } from '@cloudinary/ng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +45,7 @@ import { UserArticlesComponent } from './components/user/user-articles/user-arti
 import { UserDashboardLayoutComponent } from './layouts/user-dashboard-layout/user-dashboard-layout.component';
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,15 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
     MatSelectModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    UserService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (userService: UserService) => () => userService.initializeUserData(),
+      deps: [UserService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

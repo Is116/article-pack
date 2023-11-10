@@ -1,27 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { faInstagram, faTwitter, faYoutube, faBlogger } from '@fortawesome/free-brands-svg-icons';
+import {
+  faInstagram,
+  faTwitter,
+  faYoutube,
+  faBlogger,
+} from '@fortawesome/free-brands-svg-icons';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
+  user: any;
+
   socialIcons = [
-    {route: '/', icon: faInstagram},
-    {route: '/', icon: faTwitter},
-    {route: '/', icon: faYoutube},
-    {route: '/', icon: faBlogger},
+    { route: '/', icon: faInstagram },
+    { route: '/', icon: faTwitter },
+    { route: '/', icon: faYoutube },
+    { route: '/', icon: faBlogger },
   ];
   navLinks = [
-    {route: '/', label: 'Home'},
-    {route: '/about', label: 'About'},
-    {route: '/categories', label: 'Categories'},
-    {route: '/articles', label: 'Articles'}
+    { route: '/', label: 'Home' },
+    { route: '/about', label: 'About' },
+    { route: '/categories', label: 'Categories' },
+    { route: '/articles', label: 'Articles' },
   ];
 
   dropdownOpen = false;
 
-  constructor() { }
+  constructor(private userService: UserService) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user = this.userService.getUserData();
+  }
+
+  logout() {
+    this.userService.logout();
+  }
 }

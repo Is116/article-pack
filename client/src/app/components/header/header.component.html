@@ -1,22 +1,55 @@
 <nav class="bg-white mx-4 lg:mx-8 pt-10 pb-4 border-b-4 border-black">
-    <div class="flex flex-wrap justify-between">
-      <a routerLink="/" title="home" class="flex items-center">
-        <span class="self-center text-2xl font-bold whitespace-nowrap uppercase">Article Pack</span>
-      </a>
-      <div class="flex items-center sm:order-2">
-        <span class="self-center text-sm font-normal whitespace-nowrap underline">@isuru</span>
-          <ng-container *ngFor="let icon of socialIcons">
-            <a [routerLink]="icon.route">
-              <fa-icon class="text-md lg:text-xl mx-1 lg:mx-2" [icon]="icon.icon"></fa-icon>
-            </a>
-          </ng-container>
-      </div>
-      <div class="sm:flex sm:w-auto sm:order-1" >
-        <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 sm:gap-10 mt-4 font-medium">
-          <ng-container *ngFor="let link of navLinks">
-              <a [routerLink]="link.route" class="lg:text-primary-700">{{link.label}}</a>
-          </ng-container>
-        </div>
+  <div class="flex flex-wrap justify-between">
+    <a routerLink="/" title="home" class="flex items-center">
+      <span class="self-center text-2xl font-bold whitespace-nowrap uppercase"
+        >Article Pack</span
+      >
+    </a>
+    <div class="flex items-center sm:order-2">
+      <a
+        *ngIf="!user"
+        routerLink="/login"
+        class="self-center text-sm font-normal whitespace-nowrap underline mr-4"
+      >
+        <span
+          class="self-center text-sm font-normal whitespace-nowrap underline mr-4"
+        >
+          Login
+        </span></a
+      >
+      <span class="self-center text-sm font-normal whitespace-nowrap mr-4 text-black">{{
+        user?.name
+      }}</span>
+      <ng-container *ngFor="let icon of socialIcons">
+        <a [routerLink]="icon.route">
+          <fa-icon
+            class="text-md lg:text-xl mx-1 lg:mx-2"
+            [icon]="icon.icon"
+          ></fa-icon>
+        </a>
+      </ng-container>
+      <button
+        *ngIf="user"
+        (click)="logout()"
+        class="self-center text-sm font-normal whitespace-nowrap underline ml-4"
+      >
+        <span
+          class="self-center text-sm font-normal whitespace-nowrap underline mr-4"
+        >
+          Logout
+        </span>
+      </button>
+    </div>
+    <div class="sm:flex sm:w-auto sm:order-1">
+      <div
+        class="grid grid-cols-3 sm:grid-cols-4 gap-4 sm:gap-10 mt-4 font-medium"
+      >
+        <ng-container *ngFor="let link of navLinks">
+          <a [routerLink]="link.route" class="lg:text-primary-700">{{
+            link.label
+          }}</a>
+        </ng-container>
       </div>
     </div>
-  </nav>  
+  </div>
+</nav>

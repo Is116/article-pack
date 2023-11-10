@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AdminDashboardLayoutComponent {
   sidebarData: SidebarData = {
     navigationLinks: [
-      { label: 'Dashboard', link: '/admin/dashboard' },
+      { label: 'Dashboard', link: '/admin/' },
       { label: 'Categories', link: '/admin/categories' },
       { label: 'Articles', link: '/admin/articles' },
       { label: 'Users', link: '/admin/users' },
