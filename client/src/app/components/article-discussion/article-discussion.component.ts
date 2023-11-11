@@ -9,7 +9,7 @@ import { UserService } from 'src/app/user.service';
 interface Comment {
   date: string | null;
   comment: string;
-  username: string; // Change 'userId' to 'username'
+  username: string;
   articleId: string;
 }
 

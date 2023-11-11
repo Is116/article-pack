@@ -5,6 +5,7 @@ import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.comp
 import { AddArticalComponent } from '../../admin/add-artical/add-artical.component';
 import { ViewArticalContentComponent } from '../../admin/view-artical-content/view-artical-content.component';
 import { AdminCommentsComponent } from '../../admin/admin-comments/admin-comments.component';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-user-articles',
@@ -12,33 +13,47 @@ import { AdminCommentsComponent } from '../../admin/admin-comments/admin-comment
 })
 export class UserArticlesComponent implements OnInit {
   articles = [] as any[];
-  constructor(public dialog: MatDialog) {
-    //get articles from server
-    fetch('http://localhost:25000/api/articles/getArticles')
+  user:any;
+  constructor(public dialog: MatDialog, private userService: UserService) {
+
+    this.user = this.userService.getUserData();
+
+    fetch(`http://localhost:25000/api/articles/getUserArticles?userId=${this.user.id}`, {
+      method: 'GET',
+    })
       .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
         return response.json();
       })
       .then((data) => {
         if (data && data.articles) {
           const articlesWithCategoryNames = data.articles.map(
             async (article: any) => {
-              const categoryResponse = await fetch(
-                `http://localhost:25000/api/articles/getCategory/${article.category}`
-              );
-              const categoryData = await categoryResponse.json();
-              if (categoryData && categoryData.category) {
-                article.id = article._id;
-                article.categoryName = categoryData.category.name;
-                article.categoryId = categoryData.category._id;
-              } else {
-                console.error(
-                  'Category data is not in the expected format:',
-                  categoryData
+              try {
+                const categoryResponse = await fetch(
+                  `http://localhost:25000/api/articles/getCategory/${article.category}`
                 );
+                if (!categoryResponse.ok) {
+                  throw new Error(`Request failed with status ${categoryResponse.status}`);
+                }
+                const categoryData = await categoryResponse.json();
+                
+                if (categoryData && categoryData.category) {
+                  article.id = article._id;
+                  article.categoryName = categoryData.category.name;
+                  article.categoryId = categoryData.category._id;
+                } else {
+                  console.error('Category data is not in the expected format:', categoryData);
+                }
+              } catch (categoryError) {
+                console.error('Error fetching category data:', categoryError);
               }
               return article;
             }
           );
+          
           Promise.all(articlesWithCategoryNames).then((articles) => {
             this.articles = articles;
           });
@@ -49,7 +64,7 @@ export class UserArticlesComponent implements OnInit {
       .catch((error) => {
         console.error('Error fetching articles:', error);
       });
-  }
+    }    
 
   ngOnInit(): void {}
 
