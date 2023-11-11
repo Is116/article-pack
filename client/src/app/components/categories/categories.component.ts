@@ -12,12 +12,10 @@ export class CategoriesComponent {
 
   constructor() {
     fetch('http://localhost:25000/api/articles/getCategories')
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         if (data && data.categories && Array.isArray(data.categories)) {
-          this.categories = data.categories.map((category: any) => ({
+          this.categories = data.categories.slice(0, 4).map((category: any) => ({
             id: category._id,
             name: category.name,
             description: category.description,

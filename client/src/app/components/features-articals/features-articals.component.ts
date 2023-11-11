@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-interface artical {
+interface Artical {
   name: string;
   category: string;
   categoryName: string;
@@ -17,17 +17,14 @@ interface artical {
 export class FeaturesArticalsComponent {
   rightArrow = faArrowRight;
 
-  articals: artical[] | undefined;
+  articals: Artical[] = [];
 
   constructor() {
-    //get articals from server with API localhost:25000/api/articles/getArticles and match articals array
     fetch('http://localhost:25000/api/articles/getArticles')
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
         if (data && data.articles) {
-          const articlePromises = data.articles.map(async (article: any) => {
+          const articlePromises = data.articles.slice(0, 4).map(async (article: any) => {
             const categoryResponse = await fetch(
               `http://localhost:25000/api/articles/getCategory/${article.category}`
             );
@@ -41,6 +38,7 @@ export class FeaturesArticalsComponent {
               link: `/artical/${article._id}`,
             };
           });
+
           Promise.all(articlePromises).then((articles) => {
             this.articals = articles;
           });
@@ -49,7 +47,7 @@ export class FeaturesArticalsComponent {
         }
       })
       .catch((error) => {
-        console.error('Error fetching articals:', error);
+        console.error('Error fetching articles:', error);
       });
   }
 }
