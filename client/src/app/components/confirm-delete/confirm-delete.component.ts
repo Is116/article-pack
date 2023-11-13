@@ -13,10 +13,10 @@ export class ConfirmDeleteComponent {
     ) {}
   
     onCancelClick(): void {
-      this.dialogRef.close(false); // User clicked cancel
+      this.dialogRef.close(false);
     }
   
     onConfirmClick(): void {
-      this.dialogRef.close(true); // User confirmed the delete action
+      this.dialogRef.close(true); 
     }
 }

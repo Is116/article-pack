@@ -28,7 +28,6 @@ export class AllArticlesComponent {
   categories: string[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router) {
-    //get articles from server with API localhost:25000/api/articles/getArticles and match articles array
     fetch('http://localhost:25000/api/articles/getArticles')
       .then((response) => {
         return response.json();

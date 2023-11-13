@@ -31,7 +31,6 @@ export class EditCategoryComponent {
       const description = this.categoryForm.controls['description'].value;
       const image = this.categoryForm.controls['uploadedImage'].value;
 
-      // send data to server with API localhost:25000/api/articles/updateCategory
       fetch(
         'http://localhost:25000/api/articles/updateCategory/' +
           this.category.id,
@@ -44,7 +43,6 @@ export class EditCategoryComponent {
         }
       )
         .then((response) => {
-          // if response status is not 200, show error message
           if (response.status !== 200) {
             alert('Invalid data');
             return;
@@ -52,14 +50,12 @@ export class EditCategoryComponent {
           return response.json();
         })
         .then((data) => {
-          // show success message only if response status is 200
           if (data.message) {
             alert(data.message);
           }
           window.location.reload();
         });
 
-      // Close the dialog and pass the updated category data
       this.dialogRef.close(this.category);
     }
   }
@@ -73,13 +69,11 @@ export class EditCategoryComponent {
       const cloudName = 'doef5xnli';
       const apiKey = '178264359278328';
 
-      // Create a FormData object and rename it to imageData
       const imageData = new FormData();
       imageData.append('file', selectedImageFile);
       imageData.append('api_key', apiKey);
       imageData.append('upload_preset', 'px7vcph3');
 
-      // Upload the selected image to Cloudinary using FormData
       fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
         method: 'POST',
         body: imageData,
@@ -92,12 +86,10 @@ export class EditCategoryComponent {
           return response.json();
         })
         .then((data) => {
-          // Extract the public_id and format from the data object and create the URL
           this.categoryForm.controls['uploadedImage'].setValue(
             `https://res.cloudinary.com/${cloudName}/image/upload/${data.public_id}.${data.format}`
           );
 
-          // Now, uploadedImage contains the URL as a single string
           console.log(
             'Uploaded Image URL:',
             this.categoryForm.controls['uploadedImage'].value

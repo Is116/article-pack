@@ -31,14 +31,12 @@ export class EditArticalComponent {
       uploadedImage: [this.article.image || ''],
     });
 
-    //get categories from server
     fetch('http://localhost:25000/api/articles/getCategories')
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         if (data && data.categories) {
-          // from the data get from server, we only need id and name
           this.categories = data.categories.map((category: any) => {
             return { id: category._id, name: category.name };
           });
@@ -74,7 +72,6 @@ export class EditArticalComponent {
       const approvalStatus = this.articleForm.controls['approvalStatus'].value;
       const image = this.articleForm.controls['uploadedImage'].value;
 
-      // send data to server to update article with API localhost:25000/api/articles/updateArticle
       fetch(
         `http://localhost:25000/api/articles/updateArticle/${this.article._id}`,
         {
@@ -91,14 +88,14 @@ export class EditArticalComponent {
             image,
           }),
         }
-      ) // if response status is not 200, show error message
+      )
         .then((response) => {
           if (response.status !== 200) {
             alert('Invalid data');
             return;
           }
           return response.json();
-        }) // show success message only if response status is 201
+        }) 
         .then((data) => {
           if (data.message) {
             alert(data.message);
@@ -109,7 +106,6 @@ export class EditArticalComponent {
           console.error('Error updating article:', error);
         });
 
-      // Clear the form and selected image
       this.articleForm.reset();
       this.selectedImage = null;
     }
@@ -124,13 +120,11 @@ export class EditArticalComponent {
       const cloudName = 'doef5xnli';
       const apiKey = '178264359278328';
 
-      // Create a FormData object and rename it to imageData
       const imageData = new FormData();
       imageData.append('file', selectedImageFile);
       imageData.append('api_key', apiKey);
       imageData.append('upload_preset', 'px7vcph3');
 
-      // Upload the selected image to Cloudinary using FormData
       fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
         method: 'POST',
         body: imageData,
@@ -143,12 +137,10 @@ export class EditArticalComponent {
           return response.json();
         })
         .then((data) => {
-          // Extract the public_id and format from the data object and create the URL
           this.articleForm.controls['uploadedImage'].setValue(
             `https://res.cloudinary.com/${cloudName}/image/upload/${data.public_id}.${data.format}`
           );
 
-          // Now, uploadedImage contains the URL as a single string
           console.log(
             'Uploaded Image URL:',
             this.articleForm.controls['uploadedImage'].value

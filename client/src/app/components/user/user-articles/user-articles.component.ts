@@ -81,7 +81,6 @@ export class UserArticlesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // delete artical from server
         fetch(
           `http://localhost:25000/api/articles/deleteArticle/${articalId}`,
           {

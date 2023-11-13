@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
       const email = this.signupForm.controls['email'].value;
       const password = this.signupForm.controls['password'].value;
 
-      // send data to server with API localhost:25000
       fetch('http://localhost:25000/api/auth/register', {
         method: 'POST',
         headers: {
@@ -44,7 +43,6 @@ export class RegisterComponent implements OnInit {
         body: JSON.stringify({ name, email, password }),
       })
         .then((response) => {
-          // if response status is not 200, show error message
           if (response.status !== 201) {
             alert('User already exists or inavlid data');
             return;
@@ -53,7 +51,6 @@ export class RegisterComponent implements OnInit {
         })
         .then((data) => {
           console.log(data);
-          // save data in a tasty tookie because I'm a cookie monster:)))))))
           localStorage.setItem('token', data.token);
         });
     }

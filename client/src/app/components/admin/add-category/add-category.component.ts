@@ -26,7 +26,6 @@ export class AddCategoryComponent implements OnInit {
       const description = this.categoryForm.controls['description'].value;
       const image = this.uploadedImage;
 
-      // send data to server with API localhost:25000/api/articles/addCategory
       fetch('http://localhost:25000/api/articles/addCategory', {
         method: 'POST',
         headers: {
@@ -35,7 +34,6 @@ export class AddCategoryComponent implements OnInit {
         body: JSON.stringify({ name, description, image }),
       })
         .then((response) => {
-          // if response status is not 201, show error message
           if (response.status !== 201) {
             alert('Invalid data');
             return;
@@ -43,7 +41,6 @@ export class AddCategoryComponent implements OnInit {
           return response.json();
         })
         .then((data) => {
-          // show success message only if response status is 201
           if (data.message) {
             alert(data.message);
           }
@@ -61,13 +58,11 @@ export class AddCategoryComponent implements OnInit {
       const cloudName = 'doef5xnli';
       const apiKey = '178264359278328';
 
-      // Create a FormData object and rename it to imageData
       const imageData = new FormData();
       imageData.append('file', selectedImageFile);
       imageData.append('api_key', apiKey);
       imageData.append('upload_preset', 'px7vcph3');
 
-      // Upload the selected image to Cloudinary using FormData
       fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
         method: 'POST',
         body: imageData,
@@ -80,10 +75,8 @@ export class AddCategoryComponent implements OnInit {
           return response.json();
         })
         .then((data) => {
-          // Extract the public_id and format from the data object and create the URL
           this.uploadedImage = `https://res.cloudinary.com/${cloudName}/image/upload/${data.public_id}.${data.format}`;
 
-          // Now, uploadedImage contains the URL as a single string
           console.log('Uploaded Image URL:', this.uploadedImage);
         });
     }

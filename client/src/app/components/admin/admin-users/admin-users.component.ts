@@ -1,5 +1,3 @@
-// admin-users.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
@@ -51,8 +49,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    // Assuming you have an API endpoint to fetch users
-    const apiUrl = 'http://localhost:25000/api/auth/allUsers'; // Update the URL accordingly
+    const apiUrl = 'http://localhost:25000/api/auth/allUsers';
 
     this.http.get<User[]>(apiUrl).subscribe(
       (data) => {

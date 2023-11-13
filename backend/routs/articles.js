@@ -3,7 +3,6 @@ const router = express.Router();
 const Category = require("../models/category");
 const Article = require("../models/article");
 
-// add new category
 router.post("/addCategory", async (req, res) => {
   try {
     const { name, description, image } = req.body;
@@ -20,7 +19,6 @@ router.post("/addCategory", async (req, res) => {
   }
 });
 
-// update category
 router.put("/updateCategory/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -37,7 +35,6 @@ router.put("/updateCategory/:id", async (req, res) => {
   }
 });
 
-// get all categories
 router.get("/getCategories", async (req, res) => {
   try {
     const categories = await Category.find();
@@ -48,7 +45,6 @@ router.get("/getCategories", async (req, res) => {
   }
 });
 
-// get category by id
 router.get("/getCategory/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -60,7 +56,6 @@ router.get("/getCategory/:id", async (req, res) => {
   }
 });
 
-// delete category
 router.delete("/deleteCategory/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -72,7 +67,6 @@ router.delete("/deleteCategory/:id", async (req, res) => {
   }
 });
 
-// add new article
 router.post("/addArticle", async (req, res) => {
   try {
     const { name, category, content, status, image, author } = req.body;
@@ -92,7 +86,6 @@ router.post("/addArticle", async (req, res) => {
   }
 });
 
-// update an article
 router.put("/updateArticle/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -112,7 +105,6 @@ router.put("/updateArticle/:id", async (req, res) => {
   }
 });
 
-// get all articles
 router.get("/getArticles", async (req, res) => {
   try {
     const articles = await Article.find();
@@ -141,7 +133,6 @@ router.get("/getUserArticles", async (req, res) => {
 });
 
 
-// delete article
 router.delete("/deleteArticle/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -153,7 +144,6 @@ router.delete("/deleteArticle/:id", async (req, res) => {
   }
 });
 
-// get article by id
 router.get("/getArticle/:id", async (req, res) => {
   try {
     const { id } = req.params;
