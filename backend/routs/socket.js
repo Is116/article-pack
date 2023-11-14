@@ -1,4 +1,3 @@
-// socketServer.js
 const socketIO = require('socket.io');
 const Comment = require('../models/comment');
 

@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/user.service';
+import { io } from 'socket.io-client';
 
 interface Comment {
+  _id?: string;
   date: string | null;
   comment: string;
   username: string;
@@ -18,9 +20,10 @@ interface Comment {
 })
 export class ArticleDiscussionComponent implements OnInit {
   @Input() articleId: string = '';
-  commentForm: FormGroup; 
+  commentForm: FormGroup;
   comments: Comment[] = [];
   currentUser: any;
+  private socket: any;
 
   constructor(
     private fb: FormBuilder,
@@ -31,11 +34,24 @@ export class ArticleDiscussionComponent implements OnInit {
     this.commentForm = this.fb.group({
       comment: ['', Validators.required],
     });
+
+    this.socket = io('http://localhost:25000');
   }
 
   ngOnInit() {
     this.fetchComments();
     this.currentUser = this.userService.getUserData();
+
+    this.socket.on('newComment', (data: any) => {
+      this.comments.push(data.comment);
+    });
+
+    this.socket.on('commentDeleted', (data: any) => {
+      const deletedCommentIndex = this.comments.findIndex(comment => comment._id === data.commentId);
+      if (deletedCommentIndex !== -1) {
+        this.comments.splice(deletedCommentIndex, 1);
+      }
+    });
   }
 
   fetchComments() {
@@ -43,12 +59,7 @@ export class ArticleDiscussionComponent implements OnInit {
 
     this.http.get(apiUrl).subscribe(
       (data: any) => {
-        this.comments = data.comments.map((comment: any) => ({
-          date: comment.date,
-          comment: comment.comment,
-          username: comment.username,
-          articleId: comment.articleId,
-        }));
+        this.comments = data.comments;
       },
       (error) => {
         console.error('Error fetching comments:', error);
@@ -60,13 +71,13 @@ export class ArticleDiscussionComponent implements OnInit {
     if (this.commentForm.valid) {
       if (this.currentUser) {
         const newComment: Comment = {
+          _id: '',
           date: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
           comment: this.commentForm.value.comment,
           username: this.currentUser.name,
           articleId: this.articleId,
         };
 
-        console.log(this.currentUser);
         this.http.post('http://localhost:25000/api/comments/addComment', newComment).subscribe(
           (data: any) => {
             this.comments.push(data.comment);
@@ -82,3 +93,4 @@ export class ArticleDiscussionComponent implements OnInit {
     }
   }
 }
+
